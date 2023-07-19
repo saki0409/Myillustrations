@@ -1,0 +1,750 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*padding、borderの合計値を100%に合わせる必要がなくなるため、指定が楽になる*/
+}
+
+
+
+
+/**
+ * ******************************************************************************
+ * header navgation
+ * ******************************************************************************
+ */
+
+
+
+
+ nav {
+    display: flex;/*navタグを横並びにする*/
+    justify-content: space-around;/*等間隔に間を開けてくれる*/
+    align-items: center;
+    min-height: 13vh;
+    background-color: rgb(19 25 29);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+
+
+
+/********************************
+/*My Profile ロゴのアニメーション*/
+/********************************/
+
+
+
+
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 10vh;
+    font-size: 1.5rem;
+    letter-spacing: .4rem;
+    color: #fff;
+    font-family: 'Playfair', serif;
+}
+
+.marker span { margin: 0; }
+.marker, .y, .P, .r, .o, .f, .i, .l {
+    animation-timing-function: cubic-bezier(0.15,-0.01, 0.58, 1);
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    will-change: transform;
+}
+
+.marker {
+    position: absolute;
+    top: 1.2rem;
+    left: 0;
+    height: 0.01rem;
+    width: 1.2rem;
+    background-color: rgb(255, 255, 255);
+    animation-name: marker;
+}
+
+
+.y { margin-left: 6px;   animation-name: y; }
+.P { margin-left: 9px; animation-name: P; }
+.r { margin-left: 5px; animation-name: r; }
+.o { margin-left: 5px; animation-name: o; }
+.f { margin-left: 5px; animation-name: f; }
+.i { margin-left: 10px; animation-name: i; }
+.l { margin: 0 4px 0 6px; animation-name: l; }
+
+
+@keyframes y { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(1rem); }
+}
+@keyframes P { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(1rem); }
+}
+
+@keyframes r { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(.9rem); }
+}
+@keyframes o { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(.9rem); }
+}
+@keyframes f { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(.9rem); }
+}
+@keyframes i { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(.6rem); }
+}
+@keyframes l { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(.4rem); }
+}
+@keyframes marker { 
+  0%, 20% { transform: translateX(0); }
+  50%, 70% { transform: translateX(12.5rem); }
+}
+
+
+
+@media (max-width: 786px) {
+  .logo {
+      min-height: 7.5vh;
+      font-size: .9rem;
+      letter-spacing: .1rem;
+  }
+  .marker {
+      width: 0.8rem;
+  }
+  @keyframes marker { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(7.5rem); }
+  }
+}
+
+
+
+
+/********************************
+/*nav menu*/
+/********************************/
+
+
+
+
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;;/*タグが増えても。等間隔に間を開けてくれる*/
+    width: 38%;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.8s ease-in-out;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+
+
+@media (max-width: 1024px) {
+  nav {
+      min-height: 10vh;
+}
+  .nav-links {
+      width: 55%;
+  }
+}
+@media (max-width: 786px) {
+  body {
+      overflow-x: hidden;/*右にスクロールできなくする*/
+    }
+  .nav-links {
+      position: absolute;
+      right: 0;
+      height: 92vh;
+      top: 8vh;
+      background-color:  rgb(19 25 29);
+      display: block;
+      width: 50%;
+      transform: translateX(100%);
+      z-index: 5;
+  } 
+  .nav-links li {
+      opacity: 0;
+      text-align: center;
+      padding: 40px 0 40px;
+    }
+}
+
+
+
+
+/********************************
+/*nav menu ホバーしたときのエフェクト*/
+/********************************/
+
+
+
+
+
+.nav-links  a {
+  position: relative;
+  text-decoration: none;
+  letter-spacing: .2rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.nav-links li a::after {
+  position: absolute;
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #ffffff;
+  bottom: -10px;
+  left: 0;
+  width: 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.nav-links  li a:hover::after {
+  width: 100%;
+}
+
+
+
+
+/********************************
+/*ハンバーガーナビゲーション*/
+/********************************/
+
+
+
+
+
+.burger {
+    display: none;
+    cursor: pointer; /*要素にマウスを乗せたときに、カーソルがポインターに変化*/
+}
+
+@media (max-width: 786px) {
+    .burger {
+      display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%) !important ;
+}
+
+
+.burger div{
+    width: 25px;
+    height: 1px;
+    background-color: #fff;
+    margin: 5px;
+    transition: all 0.5s ease-in-out ;
+}
+
+@keyframes navLinksFade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-1px,6px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-3px,-8px);;
+}
+
+
+
+
+/********************************
+/*main img & text*/
+/********************************/
+
+
+
+
+
+ .header-img {
+    position: relative;
+    background-image: url(../images/main-img2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    height: 700px;
+}
+.header-img h1 {
+    position: absolute;
+    top: 500px;
+    display: inline-block;
+    padding-left: 60px;
+    font-size: 1.5rem;
+    letter-spacing: .50rem;
+    font-family: 'Playfair', serif;
+    color: #fff;
+}
+h1 span {
+    display: block;
+}
+
+.header-img span {
+    padding-top: 20px;
+    font-size: 4rem;
+}
+
+
+@media (max-width: 768px) {
+
+    .header-img {
+        height: 200px;
+    }
+    .header-img h1 {
+        top: 140px;
+        padding-left: 20px;
+        font-size: 0.1rem;
+        letter-spacing: 0.2rem;
+    }
+    .header-img span {
+        padding-top: 5px;
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+/**
+ * ******************************************************************************
+ * profile
+ * ******************************************************************************
+ */
+
+
+
+
+
+#profile {
+    background-color: rgb(226 231 246);
+    width: 100%;
+    height: 820px;
+    padding: 180px 0 170px;
+}
+
+
+.profile-flexAll {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 120px;
+}
+
+
+.profile {
+    max-width: 550px;
+    text-align: center;
+    padding: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    background-color: #ffffff;
+}
+
+.profile-title {
+    letter-spacing: .2rem;
+}
+
+
+h2 span {
+    display: block;
+}
+
+
+.profile-title span {
+    font-family: 'Playfair', serif;
+    padding: 10px 0 30px;
+    font-size:  2.5rem;
+}
+
+
+.profile p {
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+
+.profile-img {
+    position: relative;
+    display: flex;
+    padding-left: 90px;
+}
+
+
+.profile-img img {
+    width: 65%; 
+    max-width: 500px;
+}
+
+
+.profile-img-sub {
+    position: absolute;
+    padding-top: 245px;
+    text-align: right;
+}
+
+
+
+@media (max-width: 768px) {
+  #profile {
+    padding: 100px 0 100px;
+    height: 550px;
+    position: relative;
+  }
+.profile {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+    right: 40px;
+    padding: 20px 40px;
+}
+
+.profile  h2 {
+    text-align: center;
+    font-size: 1px;
+    letter-spacing: .2rem;
+    padding-right: 100px;
+}
+
+.profile p {
+    text-align: initial;
+    line-height: 25px;
+    font-size: 10px;
+}
+
+.profile-title p {
+    padding: 5px 0 35px;
+    font-size: 30px;
+}
+
+.profile-img {
+    position: absolute;
+    padding-left: 115px;
+    top: 100px;
+}
+.profile-img img {
+    width: 70%;
+}
+.profile-img-sub {
+    width: 70%;
+    top: 30px;
+    right: 10px;
+}
+}
+
+
+
+
+/********************************
+/*view more ボタン*/
+/********************************/
+
+
+
+
+
+.veiw-button {
+    max-width: 140px;
+    margin: 35px auto 0;
+  }
+
+a.btn_a {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #bc93b1;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.6s;
+  }
+
+a.btn_a:hover {
+    background: #000000;
+  }
+
+  @media (max-width: 768px) {
+    .veiw-button {
+      max-width: 140px; 
+      margin: 30px 0 0 0 ;
+      text-align: left;
+    }
+    
+    a.btn_a {
+      display: inline-block;
+      font-size: 5px;
+      padding: 8px 16px;
+  }
+  }
+
+
+
+
+/**
+ * ******************************************************************************
+ * works
+ * ******************************************************************************
+ */
+
+
+
+
+
+ .topworks {
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    background-color: rgb(19 25 29);
+}
+
+
+
+
+/********************************
+/*works のタイトルアニメーション*/
+/********************************/
+
+
+
+
+
+.works-title h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: .2rem;
+    padding: 120px 0 120px;
+    margin-bottom: 0; 
+    color: #fff;
+    font-family: 'Playfair', serif;
+    overflow: hidden; /*左右アニメーションで画面からはみ出る際に出る横スクロールバーを隠す*/
+}
+
+
+
+
+/********************************
+/*works の画像*/
+/********************************/
+
+
+
+
+
+.works-img-flexAll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 170px 70px;
+}
+
+
+@media (max-width: 768px) {
+  .topworks {
+    padding-bottom: 60px;
+}
+}
+
+
+.hover {
+    position: relative;
+    width: 320px;
+    height: 380px;
+    overflow: hidden;
+}
+
+.hover .hover-img {
+    margin: 0;
+    padding: 0;
+}
+
+.hover-img img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.hover .hover-text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.65);
+    opacity: 0;
+    transition: .5s ease-in-out;
+}
+
+
+.hover .hover-text .text1 {
+    font-size: 24px;
+    padding: 220px 30px 16px;
+    margin: 0;
+    letter-spacing: .2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.hover .hover-text .text2 {
+    font-size: 14px;
+    padding: 0 20px;
+    letter-spacing: .1rem;
+    margin: 0;
+}
+
+
+.hover:hover .hover-text {
+  
+  opacity: 1;/*不透明にして表示*/
+  
+  padding-top: 10px;/*padding-topで上からスライド*/
+
+}
+
+ 
+
+@media (max-width: 786px) {
+
+.works-side h2 {
+    padding: 60px 0 60px;
+}
+
+.works-img-flexAll {
+    justify-content: center;
+    margin: 0;
+}
+
+.hover {
+    position: relative;
+    width: 320px;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+}
+
+
+
+
+/********************************
+/*view more ボタン02*/
+/********************************/
+
+
+
+
+
+.veiw-button02 {
+    max-width: 140px;
+    margin: 35px auto 0;
+}
+ 
+
+.btn-02 {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    width: 120px;
+    margin: auto;
+    font-size: 16px;
+    padding: 10px;
+    color: #909bbd;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid rgb(19 25 29);
+    font-family: 'Poppins', sans-serif;
+}
+
+a.btn-02::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.26);
+    transform: translateX(-100%);
+    transition: all .5s;
+    z-index: -1;
+}
+
+
+a.btn-02:hover::before {
+	  transform: translateX(0);
+}
+
+a.btn-02:hover {
+	  color: #fff;
+}
+
+
+@media (max-width: 786px) {
+
+  .veiw-button02 {
+      max-width: 140px;
+      margin: 35px auto 0;
+  }
+
+  .btn-02 {
+      display: inline-block;
+      font-size: 5px;
+      padding: 8px 16px;
+  }
+  }
+
+
+
+
+/********************************
+/*footer*/
+/********************************/
+
+
+
+
+
+.footer {
+    font-size: 12px; 
+    width: 100%;
+    padding: 50px 0;
+    background-color: rgb(0, 0, 0);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: #fff;
+ }
+
+
+ @media (max-width: 768px) {
+  .footer {
+      padding: 35px 0;
+  }
+}
